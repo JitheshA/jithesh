@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./components/Navbar";
+import Calculator from "./pages/Calculator";
+import Foods from "./pages/Foods";
+import MealPlanner from "./pages/MealPlanner";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API = "/api";
 
 const Home = () => {
   const helloWorldApi = async () => {
@@ -39,13 +42,17 @@ const Home = () => {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-[#0f0f10] text-white">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <Navbar />
+        <div className="py-6">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/calculator" element={<Calculator />} />
+            <Route path="/foods" element={<Foods />} />
+            <Route path="/meal-planner" element={<MealPlanner />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
